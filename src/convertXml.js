@@ -11,12 +11,12 @@ function convertXml() {
   console.log(xmlDoc);
 
   // Convert XML to JSON
-  const jsonData = convert.xml2json(xmlData, {compact: true, spaces: 4});
+  const jsonData = convert.xml2json(xmlData, {compact: true, spaces: 2, });
   console.log(jsonData);
 
   // Display the converted JSON data
   const jsonInput = document.getElementById('jsonInput');
-  jsonInput.value = JSON.stringify(jsonData);
+  jsonInput.value = jsonData;
 }
 
 window.convertXml = convertXml;
