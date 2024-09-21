@@ -1,42 +1,39 @@
 import { Parser } from 'json2csv';
 
+/*
+ * JSONをCSVに変換する
+ */
 function convertJson() {
-  // Convert JSON to CSV
+  // JSONデータを取得、ターゲットは2階層目のJSON配列とする
   const jsonText = document.getElementById('jsonInput').value;
   const rawJson = JSON.parse(jsonText);
-  console.log("rawJson: ", rawJson);
-
   const rootJsonFieldName = Object.keys(rawJson);
-  console.log("rootJsonFieldName: ", rootJsonFieldName);
   const rootJson = rawJson[rootJsonFieldName];
-  console.log("rootJson: ", rootJson);
   const targetJsonFieldName = Object.keys(rootJson);
-  console.log("targetJsonFieldName: ", targetJsonFieldName);
   const targetJson = rootJson[targetJsonFieldName];
-  console.log("targetJson: ", targetJson);
 
+  // ターゲットのJSON配列からフィールド名を抽出
   const targetJsonFieldNames = {};
-
   targetJson.forEach(item => {
     recursiveExtract(targetJsonFieldNames, item);
   });
 
+  // JSONデータをCSVに変換
   const fields = Object.keys(targetJsonFieldNames);
-  console.log(fields);
-  const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: false, flattenArrays: false});
+  const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: true, flattenArrays: true});
   const csvData = json2csvParser.parse(targetJson);
-  console.log(csvData);
 
-  // Display the converted CSV data
+  // CSVデータを表示
   const csvInput = document.getElementById('csvInput');
   csvInput.value = csvData;
 }
 
 window.convertJson = convertJson;
 
+/*
+ * JSONオブジェクトからフィールド名を再帰的に抽出する
+ */
 function recursiveExtract(fieldNames, item, parentKey = '') {
-  console.log(item);
-  console.log(Object.keys(item));
   Object.keys(item).forEach((key) => {
     const newKey = parentKey ? `${parentKey}.${key}` : key;
 
