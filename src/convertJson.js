@@ -7,35 +7,9 @@ function convertJson() {
   console.log(jsonData);
   const fieldNames = {};
 
-  function recursiveExtract(item, parentKey = '') {
-    Object.keys(item).forEach((key) => {
-      const newKey = parentKey ? `${parentKey}.${key}` : key;
-
-      if (typeof item[key] === 'object' && !Array.isArray(item[key])) {
-        // オブジェクトの場合は再帰呼び出し
-        recursiveExtract(item[key], newKey);
-      } else if (Array.isArray(item[key])) {
-        // 配列の場合
-        item[key].forEach((subItem, index) => {
-          if (typeof subItem === 'object') {
-            // オブジェクトの場合は再帰呼び出し
-            recursiveExtract(subItem, `${newKey}.${index}`);
-          } else {
-            // プリミティブ値の場合
-            fieldNames[`${newKey}.${index}`] = null;
-          }
-        });
-      } else {
-        // プリミティブ値の場合
-        fieldNames[newKey] = null;
-      }
-    });
-  }
-
-jsonData.forEach(item => {
-    recursiveExtract(item);
-});
-
+  jsonData.forEach(item => {
+    recursiveExtract(fieldNames, item);
+  });
 
   const fields = Object.keys(fieldNames);
   console.log(fields);
@@ -49,3 +23,35 @@ jsonData.forEach(item => {
 }
 
 window.convertJson = convertJson;
+
+function recursiveExtract(fieldNames, item, parentKey = '') {
+  console.log(item);
+  console.log(Object.keys(item));
+  Object.keys(item).forEach((key) => {
+    const newKey = parentKey ? `${parentKey}.${key}` : key;
+
+    if (item[key] === null || item[key] === undefined) {
+      // null または undefined の場合
+      fieldNames[newKey] = null;
+    } else if (typeof item[key] === 'object' && !Array.isArray(item[key])) {
+      // オブジェクトの場合は再帰呼び出し
+      recursiveExtract(fieldNames, item[key], newKey);
+    } else if (Array.isArray(item[key])) {
+      // 配列の場合
+      item[key].forEach((subItem, index) => {
+        if (typeof subItem === 'object') {
+          // オブジェクトの場合は再帰呼び出し
+          recursiveExtract(fieldNames, subItem, `${newKey}.${index}`);
+        } else {
+          // プリミティブ値の場合
+          fieldNames[`${newKey}.${index}`] = null;
+        }
+      });
+    } else {
+      // プリミティブ値の場合
+      fieldNames[newKey] = null;
+    }
+  });
+}
+
+module.exports = { recursiveExtract };
