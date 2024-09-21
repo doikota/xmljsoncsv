@@ -3,30 +3,28 @@ import { Parser } from 'json2csv';
 function convertJson() {
   // Convert JSON to CSV
   const jsonText = document.getElementById('jsonInput').value;
-  const jsonData = JSON.parse(jsonText);
-  console.log("jsonData: ", jsonData);
+  const rawJson = JSON.parse(jsonText);
+  console.log("rawJson: ", rawJson);
 
-  const rootJsonFieldName = Object.keys(jsonData);
+  const rootJsonFieldName = Object.keys(rawJson);
   console.log("rootJsonFieldName: ", rootJsonFieldName);
-  const rootJsonField = jsonData[rootJsonFieldName];
-  console.log("root: ", rootJsonField);
-  const targetJsonFieldName = Object.keys(rootJsonField);
+  const rootJson = rawJson[rootJsonFieldName];
+  console.log("rootJson: ", rootJson);
+  const targetJsonFieldName = Object.keys(rootJson);
   console.log("targetJsonFieldName: ", targetJsonFieldName);
-  const targets = rootJsonField[targetJsonFieldName];
-  console.log("targets: ", targets);
+  const targetJson = rootJson[targetJsonFieldName];
+  console.log("targetJson: ", targetJson);
 
-  const fieldNames = {};
+  const targetJsonFieldNames = {};
 
-  targets.forEach(item => {
-    recursiveExtract(fieldNames, item);
+  targetJson.forEach(item => {
+    recursiveExtract(targetJsonFieldNames, item);
   });
-  // recursiveExtract(fieldNames, targets);
 
-  const fields = Object.keys(fieldNames);
+  const fields = Object.keys(targetJsonFieldNames);
   console.log(fields);
-  // const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: true, flattenArrays: true});
   const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: false, flattenArrays: false});
-  const csvData = json2csvParser.parse(targets);
+  const csvData = json2csvParser.parse(targetJson);
   console.log(csvData);
 
   // Display the converted CSV data

@@ -1,4 +1,4 @@
-import { recursiveExtract } from '../src/convertJson';
+import recursiveExtract from '../src/convertJson';
 
 describe('recursiveExtract', () => {
 
