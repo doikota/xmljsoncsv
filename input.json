@@ -1,0 +1,110 @@
+[
+  {
+    "country": {
+      "name": "日本",
+      "capital": "東京",
+      "cities": [
+        {
+          "name": "東京",
+          "population": 13929286,
+          "districts": [
+            {
+              "name": "千代田区",
+              "landmarks": ["皇居", "国会議事堂"]
+            },
+            {
+              "name": "新宿区",
+              "landmarks": ["新宿御苑", "東京都庁"]
+            }
+          ]
+        },
+        {
+          "name": "大阪",
+          "population": 8823459,
+          "districts": [
+            {
+              "name": "北区",
+              "landmarks": ["梅田スカイビル", "大阪城"]
+            },
+            {
+              "name": "中央区",
+              "landmarks": ["心斎橋", "道頓堀"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "country": {
+      "name": "アメリカ",
+      "capital": "ワシントンD.C.",
+      "cities": [
+        {
+          "name": "ニューヨーク",
+          "population": 8419600,
+          "districts": [
+            {
+              "name": "マンハッタン",
+              "landmarks": ["自由の女神", "セントラルパーク"]
+            },
+            {
+              "name": "ブルックリン",
+              "landmarks": ["ブルックリン橋", "プロスペクトパーク"]
+            }
+          ]
+        },
+        {
+          "name": "ロサンゼルス",
+          "population": 3980400,
+          "districts": [
+            {
+              "name": "ハリウッド",
+              "landmarks": ["ハリウッドサイン", "グリフィス天文台"]
+            },
+            {
+              "name": "ダウンタウン",
+              "landmarks": ["ロサンゼルス市庁舎", "ウォルト・ディズニー・コンサートホール"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "country": {
+      "name": "フランス",
+      "capital": "パリ",
+      "cities": [
+        {
+          "name": "パリ",
+          "population": 2140526,
+          "districts": [
+            {
+              "name": "1区",
+              "landmarks": ["ルーヴル美術館", "コンコルド広場"]
+            },
+            {
+              "name": "エッフェル塔",
+              "landmarks": ["エッフェル塔", "シャン・ド・マルス公園"]
+            }
+          ]
+        },
+        {
+          "name": "マルセイユ",
+          "population": 8616351,
+          "districts": [
+            {
+              "name": "旧港地区",
+              "landmarks": ["ノートルダム・ド・ラ・ガルド", "旧港"]
+            },
+            {
+              "name": "パニエ地区",
+              "landmarks": ["パニエ地区", "市庁舎"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

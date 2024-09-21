@@ -4,17 +4,29 @@ function convertJson() {
   // Convert JSON to CSV
   const jsonText = document.getElementById('jsonInput').value;
   const jsonData = JSON.parse(jsonText);
-  console.log(jsonData);
+  console.log("jsonData: ", jsonData);
+
+  const rootJsonFieldName = Object.keys(jsonData);
+  console.log("rootJsonFieldName: ", rootJsonFieldName);
+  const rootJsonField = jsonData[rootJsonFieldName];
+  console.log("root: ", rootJsonField);
+  const targetJsonFieldName = Object.keys(rootJsonField);
+  console.log("targetJsonFieldName: ", targetJsonFieldName);
+  const targets = rootJsonField[targetJsonFieldName];
+  console.log("targets: ", targets);
+
   const fieldNames = {};
 
-  jsonData.forEach(item => {
+  targets.forEach(item => {
     recursiveExtract(fieldNames, item);
   });
+  // recursiveExtract(fieldNames, targets);
 
   const fields = Object.keys(fieldNames);
   console.log(fields);
-  const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: true, flattenArrays: true});
-  const csvData = json2csvParser.parse(jsonData);
+  // const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: true, flattenArrays: true});
+  const json2csvParser = new Parser({ fields: fields, header: true , withBOM: true, flatten: false, flattenArrays: false});
+  const csvData = json2csvParser.parse(targets);
   console.log(csvData);
 
   // Display the converted CSV data
@@ -54,4 +66,4 @@ function recursiveExtract(fieldNames, item, parentKey = '') {
   });
 }
 
-module.exports = { recursiveExtract };
+export default recursiveExtract;
